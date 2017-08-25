@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Runner
 {
 	
-	public static boolean debug;
+	public static boolean debug = false;
 	
 	public static void main(String[] args)
 	{
@@ -16,14 +16,13 @@ public class Runner
 			msg += "\n\tjava Runner [debug [keepBtns [pauseTime [autoReplay]]]]\n";
 			msg += "\nParameter Descriptions:";
 			msg += "\n\n   <boolean> debug (default: "+debug+") -- Determines whether to show print statements.";
-			//msg += "\n\tdefault: " + debug;
+			
 			msg += "\n\n   <boolean> keepBtns (default: "+keepBs+") -- Determines if start game buttons are hidden during gameplay.";
-			//msg += "\n\tdefault: " + keepBs;
+			
 			msg += "\n\n   <int> pauseTime (default: "+pauseTime+") -- The time to pause while the Ai \"decides\" what move to make, in miliseconds.";
-			//msg += "\n\tdefault: " + pauseTime;
+			
 			msg += "\n\n   <boolean> autoReplay (default: "+autoReplay+") -- Enabling this causes a new game to start automatically after the previous one finishes, with the same players.";
 			msg += "\n\tGenerally only useful for Ai vs. Ai runs. A button is added if enabled, so it can be toggled in-game.";
-			//msg += "\n\tdefault: " + autoReplay;
 			
 			msg += "\n----\nAll parameters are optional, but must be in order. Use \"-\" to use the default value for a parameter.";
 			
@@ -55,7 +54,5 @@ public class Runner
 		frame.add(sc);
 		frame.pack();
 		frame.setVisible(true);
-		
-		//sc.renderLoop();
 	}
 }

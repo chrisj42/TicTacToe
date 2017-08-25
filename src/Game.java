@@ -1,7 +1,5 @@
 import java.awt.Graphics;
 import java.util.ArrayList;
-//import javax.swing.event.ChangeListener;
-//import javax.swing.event.ChangeEvent;
 
 public class Game
 {
@@ -35,13 +33,11 @@ public class Game
 	private Player player1, player2;
 	private int totalGamesPlayed;
 	
-	private boolean playing;//, aiPlaying;
+	private boolean playing;
 	private String status;
 	
-	public Game()
-	{
+	public Game() {
 		playing = false;
-		//aiPlaying = false;
 		curPlayer = null;
 		totalGamesPlayed = 0;
 		
@@ -62,7 +58,7 @@ public class Game
 		if(playing && player != null && curPlayer == player && grid.mark(player, x, y))
 			nextPlayer();
 		else if(Runner.debug) {
-			System.out.print("GAME: player move request from " + player.getName() + " ignored b/c ");
+			System.out.print("GAME: player move request from " + (player == null ? "null" : player.getName()) + " ignored b/c ");
 			if(!playing) System.out.print("game is not running");
 			else if(player == null) System.out.print("player is null");
 			else if(curPlayer != player) System.out.print("player is not the current player");
@@ -135,22 +131,8 @@ public class Game
 	public int getTotalGames() { return totalGamesPlayed; }
 	public String getStatusMessage() { return status; }
 	
-	//public boolean aiPlaying() { return aiPlaying; }
 	public boolean playing() { return playing; }
 	
-	/*public void computerPlay()
-	{
-		while(true){
-			System.out.print("");
-			if(aiPlaying){
-				//System.out.println("ai play");
-				aiPlay();
-				aiPlaying = false;
-				nextPlayer();
-			}
-			broadcastEvent(Events.UPDATE);
-		}
-	}*/
 	
 	public void addListener(GameListener gl) {
 		listeners.add(gl);

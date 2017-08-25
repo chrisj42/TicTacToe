@@ -27,8 +27,6 @@ public class Grid {
 	public int getSize() {return size;}
 	
 	public Square[] get1DTable() {
-		//Square[] tableArray = new Square[table.length*table[0].length];
-		//for()
 		Square[] tableArray = {
 			table[0][0], table[0][1], table[0][2],
 			table[1][0], table[1][1], table[1][2],

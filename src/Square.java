@@ -20,7 +20,6 @@ public class Square
 	}
 	
 	public void drawMe(Graphics g) {
-		//if(Runner.debug) System.out.println("painting square " + xSpot + "," + ySpot + "; player="+player);
 		if(player != null)
 			g.drawImage(player.getSymbol(), x, y, null);
 	}

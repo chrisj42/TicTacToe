@@ -47,9 +47,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 	private JSlider difficulty;
 	
 	private boolean keepBtns, autoReplay;
-	private String pgrmMsg;
-	
-	//private boolean shouldPaint = true;
 	
 	public Screen(boolean keepBtns, boolean autoStart)
 	{
@@ -60,8 +57,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 		this.keepBtns = keepBtns;
 		autoReplay = autoStart;
 		
-		pgrmMsg = "Choose a  game mode";
-		
 		newPvPGame = createButton("Player vs. Player", dimX-220, 190);
 		newPvCGame = createButton("Player vs. Computer", dimX-220, 230);
 		newCvPGame = createButton("Computer vs. Player", dimX-220, 270);
@@ -69,7 +64,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 		if(autoReplay || Runner.debug)
 			toggleReplay = createButton("Toggle auto-replay", dimX-220, 140);
 		
-		difficulty = new JSlider(0, Ai.numDiffs - 1, Ai.numDiffs - 1);
+		difficulty = new JSlider(0, Rules.numDiffs - 1, Rules.numDiffs - 1);
 		difficulty.setBounds(dimX-220, 380, 200, 50);
 		difficulty.setMajorTickSpacing(1);
 		difficulty.setPaintTicks(true);
@@ -168,31 +163,19 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 		else if(e.getSource() == newCvCGame)
 			game.newGame(computer1, computer2);
 		
-		//shouldPaint = true;
 		repaint();
 	}
 	
-	public void mouseClicked(MouseEvent e)
-	{
-		//System.out.println(e.paramString());
+	public void mouseClicked(MouseEvent e) {
 		game.playerMove(e.getX(), e.getY());
-		
-		//shouldPaint = true;
 		repaint();
 	}
-	
-	public void mousePressed(MouseEvent e){
-		//int[][] pts = { {e.getX(), e.getY()}, {e.getXOnScreen(), e.getYOnScreen()} };
-		//System.out.println("(" + pts[0][0] + ", " + pts[0][1] + ") abs: (" + pts[1][0] + ", " + pts[1][1] + ")\n");
-	}
+	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	
-	//public void computerPlay() { game.computerPlay(); }
-	
-	private int writeParagraph(Graphics g, String text, boolean centered, Rectangle bounds, int lineSpacing)
-	{
+	private int writeParagraph(Graphics g, String text, boolean centered, Rectangle bounds, int lineSpacing) {
 		int width = bounds.width, startX = bounds.x, startY = bounds.y + txtHeight(g);
 		int totalHeight = 0;
 		
@@ -221,17 +204,17 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 		
 		return totalHeight;
 	}
-	private int writeParagraph(Graphics g, String text, boolean centered, Rectangle bounds){
+	private int writeParagraph(Graphics g, String text, boolean centered, Rectangle bounds) {
 		return writeParagraph(g, text, centered, bounds, 2);
 	}
 	
-	private void sleep(int time) {
-		try{
+	/*private void sleep(int time) {
+		try {
 			Thread.sleep(time);
 		} catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
-	}
+	}*/
 	
 	@Override
 	public void gameStarted() {
@@ -244,12 +227,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 	}
 	
 	@Override
-	public void gameUpdated() {
-		//if (Runner.debug) System.out.println("game update");
-		//pgrmMsg = game.getStatusMessage();
-		//shouldPaint = true;
-		repaint();
-	}
+	public void gameUpdated() { repaint(); }
 	
 	@Override
 	public void gameEnded() {
@@ -259,7 +237,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 			add(newCvPGame);
 			add(newCvCGame);
 		} else {
-			//shouldPaint = true;
 			if(Runner.debug) System.out.println("game end; waiting");
 			javax.swing.Timer t = new javax.swing.Timer(300, e -> game.newGame());
 			t.setRepeats(false);
@@ -267,16 +244,4 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 		}
 		repaint();
 	}
-	
-	/*public void renderLoop() {
-		//noinspection InfiniteLoopStatement
-		while(true) {
-			sleep(1);
-			if(shouldPaint) {
-				shouldPaint = false;
-				if(Runner.debug) System.out.println("repainting...");
-				repaint();
-			}
-		}
-	}*/
 }

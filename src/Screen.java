@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,17 +23,26 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 {
 	public static final int dimX = 900, dimY = 600;
 	
+	private static final int REPLAY_DELAY = 1000;
+	
 	private static BufferedImage xPic, sX, oPic, sO;
 	
 	static {
-		try{
+		try {
 			xPic = ImageIO.read(new File("resources/X.png"));
 			sX = ImageIO.read(new File("resources/smallX.png"));
 			oPic = ImageIO.read(new File("resources/O.png"));
 			sO = ImageIO.read(new File("resources/smallO.png"));
-		} catch(IOException ex) {
-			System.err.println("couldn't read image files:");
-			ex.printStackTrace();
+		} catch(IOException ex1) {
+			try {
+				xPic = ImageIO.read(new File("X.png"));
+				sX = ImageIO.read(new File("smallX.png"));
+				oPic = ImageIO.read(new File("O.png"));
+				sO = ImageIO.read(new File("smallO.png"));
+			} catch(IOException ex2) {
+				System.err.println("couldn't read image files:");
+				ex2.printStackTrace();
+			}
 		}
 	}
 	
@@ -208,14 +218,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 		return writeParagraph(g, text, centered, bounds, 2);
 	}
 	
-	/*private void sleep(int time) {
-		try {
-			Thread.sleep(time);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-	}*/
-	
 	@Override
 	public void gameStarted() {
 		if(!keepBtns) {
@@ -238,7 +240,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 			add(newCvCGame);
 		} else {
 			if(Runner.debug) System.out.println("game end; waiting");
-			javax.swing.Timer t = new javax.swing.Timer(300, e -> game.newGame());
+			Timer t = new Timer(REPLAY_DELAY, e -> game.newGame());
 			t.setRepeats(false);
 			t.start();
 		}

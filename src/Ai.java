@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 public class Ai extends Player {
 	
-	public static int aiTime = 1000; // time sleeping before making move, in milliseconds.
+	public static int AI_DELAY = 1000; // time sleeping before making move, in milliseconds.
 	
 	private int level;
 	
@@ -13,7 +13,7 @@ public class Ai extends Player {
 	}
 	
 	public void doTurn(Game game) {
-		Timer t = new Timer(aiTime, e -> chooseSquare(game));
+		Timer t = new Timer(AI_DELAY, e -> chooseSquare(game));
 		t.setRepeats(false);
 		t.start();
 	}

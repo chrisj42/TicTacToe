@@ -44,7 +44,7 @@ public class Runner
 		if(args.length > 3 && !args[3].equals("-"))
 			autoReplay = Boolean.valueOf(args[3]);
 		
-		Ai.aiTime = pauseTime;
+		Ai.AI_DELAY = pauseTime;
 		
 		if(debug)
 			System.out.println("debug mode");

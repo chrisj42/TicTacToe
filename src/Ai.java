@@ -18,7 +18,7 @@ public class Ai extends Player {
 		t.start();
 	}
 	
-	private void chooseSquare(Game game) {
+	protected void chooseSquare(Game game) {
 		Grid grid = game.getGrid();
 		Player opponent = game.getNextPlayer();
 		

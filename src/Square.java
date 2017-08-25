@@ -4,13 +4,12 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class Square
-{
+public class Square {
+	
 	private Player player;
 	private int x, y, size, xSpot, ySpot;
 	
-	public Square(int x, int y, int size, int yPos, int xPos)
-	{
+	public Square(int x, int y, int size, int yPos, int xPos) {
 		player = null;
 		this.size = size;
 		this.x = x;
@@ -24,8 +23,7 @@ public class Square
 			g.drawImage(player.getSymbol(), x, y, null);
 	}
 	
-	public boolean clickable(int cX, int cY)
-	{
+	public boolean clickable(int cX, int cY) {
 		return player == null && cX > x && cX < x + size && cY > y && cY < y + size;
 	}
 	
@@ -37,7 +35,7 @@ public class Square
 	public int getRow() {return ySpot;}
 	public int getCol() {return xSpot;}
 	
-	public String toString(){
+	public String toString() {
 		return "position:[" + ySpot + "][" + xSpot + "]; player:" + (player == null ? "none" : player.getName()) + "; x:" + x + "; y:" + y + "; size:" + size;
 	}
 }

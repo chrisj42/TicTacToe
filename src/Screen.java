@@ -19,8 +19,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Screen extends JPanel implements MouseListener, ActionListener, GameListener
-{
+public class Screen extends JPanel implements MouseListener, ActionListener, GameListener {
+	
 	public static final int dimX = 900, dimY = 600;
 	
 	private static BufferedImage xPic, sX, oPic, sO;
@@ -56,8 +56,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 	
 	private boolean keepBtns, autoReplay;
 	
-	public Screen(boolean keepBtns, boolean autoStart)
-	{
+	public Screen(boolean keepBtns, boolean autoStart) {
 		setLayout(null);
 		
 		game = new Game();
@@ -87,8 +86,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 	
 	public Dimension getPreferredSize() {return new Dimension(dimX, dimY);}
 	
-	private JButton createButton(String title, int boundX, int boundY)
-	{
+	private JButton createButton(String title, int boundX, int boundY) {
 		JButton button = new JButton(title);
 		button.setBounds(boundX, boundY, 200, 30);
 		button.addActionListener(this);
@@ -105,8 +103,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 	//private int xTextPos(Graphics g, String text, int offset) {return (dimX+offset-txtWidth(g, text))/2;}
 	private int centerText(Graphics g, String text, int leftX, int rightX) {return leftX + (rightX-leftX-txtWidth(g, text))/2;}
 	
-	protected void paintComponent(Graphics g)
-	{
+	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
 		Font title = new Font("Arial", Font.BOLD, 25);
@@ -152,8 +149,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 			writeParagraph(g, game.getStatusMessage(), true, textArea);
 	}
 	
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == toggleReplay) {
 			autoReplay = !autoReplay;
 			return;
@@ -190,13 +186,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 		//String method that splits a String phrase into words, since " " is passed in:
 		String[] words = text.split(" ");
 		int i = 0;//Count integer
-		while (i < words.length)
-		{
+		while (i < words.length) {
 			//String that holds the characters that will be printed on the current line:
 			StringBuilder currentLine = new StringBuilder(words[i++]);
 			//While loop that runs while the pixel width of the string is less than the width passed in:
-			while (( i < words.length ) && (words[i].length() != 0) && (g.getFontMetrics(g.getFont()).stringWidth(currentLine + " " + words[i]) < width))
-			{
+			while (( i < words.length ) && (words[i].length() != 0) && (g.getFontMetrics(g.getFont()).stringWidth(currentLine + " " + words[i]) < width)) {
 				currentLine.append(" ").append(words[i]);//Adds as many words as will fit onto the line
 				i++;
 			}

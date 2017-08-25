@@ -10,15 +10,15 @@ public class Grid {
 	
 	private int x, y, size, inc;
 	
-	public Grid(int x, int y, int size){
+	public Grid(int x, int y, int size) {
 		table = new Square[3][3];
 		this.x = x;
 		this.y = y;
 		this.size = size;
 		inc = size/3;
 		
-		for(int i = 0; i < table.length; i++){
-			for(int j = 0; j < table[i].length; j++){
+		for(int i = 0; i < table.length; i++) {
+			for(int j = 0; j < table[i].length; j++) {
 				table[i][j] = new Square(x+inc*j+2, y+inc*i+2, inc-4, i, j);
 			}
 		}
@@ -37,8 +37,7 @@ public class Grid {
 	
 	public Square getSquare(int row, int col) {return table[row][col];}
 	
-	public void drawMe(Graphics g)
-	{
+	public void drawMe(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(x+inc-2, y-2, 4, size+4);//left vertical
 		g.fillRect(x+inc*2-2, y-2, 4, size+4);//right vertical
@@ -50,10 +49,10 @@ public class Grid {
 				table[i][j].drawMe(g);
 	}
 	
-	public boolean mark(Player player, int cx, int cy){
+	public boolean mark(Player player, int cx, int cy) {
 		for(Square[] line: table) {
 			for(Square box: line) {
-				if(box.clickable(cx, cy)){
+				if(box.clickable(cx, cy)) {
 					box.setPlayer(player);
 					if(Runner.debug) System.out.println("GRID: set square " + box);
 					return true;
@@ -66,16 +65,14 @@ public class Grid {
 	}
 	
 	public Square[][] getTokenSets(Player player, int numVals) { return getTokenSets(player, numVals, false); }
-	public Square[][] getTokenSets(Player player, int numVals, boolean othersEmpty)
-	{
+	public Square[][] getTokenSets(Player player, int numVals, boolean othersEmpty) {
 		//the idea is to return the squares that would make a tic-tac-toe if filled.
 		//changed to just return all the sets of three in a row with two of the given value
 		ArrayList<Square[]> matches = new ArrayList<Square[]>();
 		
 		Square[][] iTab = new Square[3][3];
 		Square[] diag1 = new Square[3], diag2 = new Square[3];
-		for(int i = 0; i < table.length; i++)
-		{
+		for(int i = 0; i < table.length; i++) {
 			for(int j = 0; j < table[i].length; j++)
 				iTab[i][j] = table[j][i];
 			
@@ -110,8 +107,7 @@ public class Grid {
 	}
 	
 	//return boxes with value from entire grid
-	public Square[] getBoxMatches(Player player)
-	{
+	public Square[] getBoxMatches(Player player) {
 		ArrayList<Square> boxes = new ArrayList<Square>();
 		
 		for(Square box: get1DTable())
@@ -122,11 +118,10 @@ public class Grid {
 	}
 	
 	//return boxes with value out of given grid coordinates
-	public Square[] getBoxMatches(Player player, int[][] coords)
-	{
+	public Square[] getBoxMatches(Player player, int[][] coords) {
 		ArrayList<Square> boxes = new ArrayList<Square>();
 		
-		for(int i = 0; i < coords.length; i++){
+		for(int i = 0; i < coords.length; i++) {
 			Square current = table[coords[i][0]][coords[i][1]];
 			if(current.getPlayer() == player)
 				boxes.add(current);
@@ -190,8 +185,7 @@ public class Grid {
 		return ranSquare(get1DTable());
 	}
 	
-	public void newGame()
-	{
+	public void newGame() {
 		for(Square[] line: table)
 			for(Square box: line)
 				box.setPlayer(null);
@@ -202,18 +196,16 @@ public class Grid {
 	}
 	
 	//for debugging
-	public void printGrid()
-	{
+	public void printGrid() {
 		System.out.println("Box states:");
-		for(Square[] line: table){
+		for(Square[] line: table) {
 			for(Square box: line)
 				System.out.print(box.getPlayer() + "\t");
 			System.out.println();
 		}
 	}
 	
-	private void printArL(ArrayList<Square> squares)
-	{
+	private void printArL(ArrayList<Square> squares) {
 		for(Square box: squares)
 			System.out.println(box);
 	}

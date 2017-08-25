@@ -1,8 +1,7 @@
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class Game
-{
+public class Game {
 	private ArrayList<GameListener> listeners = new ArrayList<>();
 	
 	enum Events {
@@ -88,8 +87,7 @@ public class Game
 	}
 	
 	public void newGame() { newGame(player1, player2); }
-	public void newGame(Player p1, Player p2)
-	{
+	public void newGame(Player p1, Player p2) {
 		if(Runner.debug) System.out.println("GAME: new game; clearing board");
 		
 		grid.newGame();
@@ -105,14 +103,13 @@ public class Game
 		curPlayer.doTurn(this);
 	}
 	
-	private void endGame(Player winner)
-	{
+	private void endGame(Player winner) {
 		if(Runner.debug) System.out.println("GAME: end game.");
 		
 		playing = false;
 		totalGamesPlayed++;
 		
-		if(winner != null){
+		if(winner != null) {
 			status = winner.getName() + " wins!";
 			winner.addScore();
 		}

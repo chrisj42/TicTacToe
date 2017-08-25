@@ -1,13 +1,12 @@
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
-public class Runner
-{
+public class Runner {
 	
 	public static boolean debug = false;
 	public static int REPLAY_DELAY = 1000;
 	
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		boolean keepBs = false;
 		boolean autoReplay = false;
 		

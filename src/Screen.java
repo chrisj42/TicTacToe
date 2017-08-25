@@ -23,8 +23,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 {
 	public static final int dimX = 900, dimY = 600;
 	
-	private static final int REPLAY_DELAY = 1000;
-	
 	private static BufferedImage xPic, sX, oPic, sO;
 	
 	static {
@@ -240,7 +238,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Gam
 			add(newCvCGame);
 		} else {
 			if(Runner.debug) System.out.println("game end; waiting");
-			Timer t = new Timer(REPLAY_DELAY, e -> game.newGame());
+			Timer t = new Timer(Runner.REPLAY_DELAY, e -> game.newGame());
 			t.setRepeats(false);
 			t.start();
 		}
